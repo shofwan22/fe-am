@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server:step1": "json-server --watch db/db-step1.json --port 4001",
+    "server:step2": "json-server --watch db/db-step2.json --port 4002"
   },
   "dependencies": {
     "axios": "^1.13.2",
