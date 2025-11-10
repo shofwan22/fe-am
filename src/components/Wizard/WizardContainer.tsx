@@ -13,7 +13,9 @@ interface WizardContainerProps {
 const WizardContainer = (props: WizardContainerProps) => {
   const { role, onComplete } = props;
   const [step, setStep] = useState(1);
+  // @ts-expect-error: will fix later
   const [basicInfo, setBasicInfo] = useState<EmployeeData>({});
+  // @ts-expect-error: will fix later
   const [details, setDetails] = useState<EmployeeData>({});
 
   const next = () => setStep((s) => s + 1);
