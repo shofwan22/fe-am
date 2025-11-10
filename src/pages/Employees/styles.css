@@ -1,0 +1,7 @@
+.employee-table {
+  margin-top: 16px;
+}
+
+.employee-table > thead > tr {
+  text-align: left;
+}
