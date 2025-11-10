@@ -167,10 +167,6 @@ docker compose down
 npm test
 ```
 
-### Included Tests
-1. **Autocomplete Test** → verifies async suggestion rendering  
-2. **Submit Flow Test** → verifies sequential POST requests + progress display  
-
 ---
 
 ## 🧱 Deployment
@@ -198,45 +194,6 @@ They can optionally be hosted using **Render**, **Railway**, or **MockAPI.io** i
 
 ---
 
-## 💾 Auto-Save Draft Logic
-
-| Role | LocalStorage Key |
-|------|------------------|
-| Admin | `draft_admin` |
-| Ops | `draft_ops` |
-
-- Auto-saves every 2 seconds of inactivity  
-- Restores on reload  
-- “Clear Draft” clears only the active role’s draft
-
----
-
-## 🧩 Developer Notes
-
-- React Router manages `/wizard` and `/employees` routes.
-- Employee ID auto-generated as `<DEPT>-<SEQ>`.
-- Submission simulates async bulk uploads with progress updates.
-- Draft auto-save uses debounced localStorage logic.
-- CSS follows **BEM structure** and responsive design (360–1440px).
-
----
-
-## 📜 Evaluation Focus (from the brief)
-
-✅ Correct role-based logic  
-✅ Async autocomplete implementation  
-✅ Draft auto-save (debounced)  
-✅ Sequential POST simulation  
-✅ Clean, modular architecture  
-✅ Vanilla CSS (no frameworks)  
-✅ Responsive layout  
-✅ Passing Jest + RTL tests  
-✅ Working frontend deployment (Vercel or Netlify)
-
----
-
 ## 👨‍💻 Author
 
 **Shofwan Hanif**  
-Frontend Engineer | React • TypeScript • UI/UX Driven Development  
-[LinkedIn](#) · [GitHub](#)
