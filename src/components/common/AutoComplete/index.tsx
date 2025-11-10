@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import './styles.css';
 import type { AutoCompleteProps, Options } from './types';
 
 const AutoComplete = (props: AutoCompleteProps) => {
@@ -9,14 +9,14 @@ const AutoComplete = (props: AutoCompleteProps) => {
 
   useEffect(() => {
     const t = setTimeout(async () => {
-      if (query) {
+      if (query && query !== value) {
         const res = await fetch(`${endpoint}?name_like=${query}`);
         const data = await res.json();
         setOptions(data);
       } else setOptions([]);
     }, 400);
     return () => clearTimeout(t);
-  }, [query, endpoint]);
+  }, [query, endpoint, value]);
 
   return (
     <div className="autocomplete">

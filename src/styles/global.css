@@ -24,6 +24,19 @@ body {
   margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  gap: 4px;
+}
+
+.form__error {
+  color: #d32f2f;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+.input--error {
+  border-color: #d32f2f !important;
+  background-color: #fff5f5;
 }
 
 input,
@@ -44,25 +57,7 @@ textarea {
   margin-right: 0.5rem;
 }
 
-.autocomplete__list {
-  background: #fff;
-  border: 1px solid #ddd;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  z-index: 2;
-  width: 200px;
-}
-.autocomplete__list li {
-  padding: 0.4rem 0.6rem;
-  cursor: pointer;
-}
-.autocomplete__list li:hover {
-  background: #f0f0f0;
-}
-
-@media (max-width: 600px) {
+@media (max-width: 767px) {
   body {
     padding: 1rem;
   }

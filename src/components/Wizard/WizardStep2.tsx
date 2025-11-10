@@ -4,7 +4,6 @@ import FileUpload from '../common/FileUpload';
 import AutoComplete from '../common/AutoComplete';
 
 import { useDraft } from '../../hooks/useDraft';
-
 import { delay } from '../../utils/delay';
 import { generateEmployeeId } from '../../utils/generateEmployeeId';
 
@@ -24,43 +23,69 @@ const WizardStep2 = (props: WizardStep2Props) => {
 
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState<string[]>([]);
+  const [errors, setErrors] = useState<{ role?: string; location?: string }>(
+    {}
+  );
 
   useDraft(`draft_${role}`, { ...basicInfo, ...data });
 
+  const validate = (): boolean => {
+    const newErrors: { role?: string; location?: string } = {};
+
+    if (!data.role || data.role.trim().length === 0) {
+      newErrors.role = 'Role is required';
+    }
+
+    if (!data.location || data.location.trim().length === 0) {
+      newErrors.location = 'Location is required';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async () => {
+    if (!validate()) return;
+
     setLoading(true);
     setProgress(['⏳ Submitting basicInfo…']);
 
-    const res = await fetch('http://localhost:4001/basicInfo');
-    const existing = await res.json();
-    const empId = generateEmployeeId(basicInfo.department, existing.length);
+    try {
+      const res = await fetch('http://localhost:4001/basicInfo');
+      const existing = await res.json();
+      const empId = generateEmployeeId(basicInfo.department, existing.length);
 
-    const payloadBasic = { ...basicInfo, employeeId: empId };
-    const payloadDetails = { ...data, employeeId: empId };
+      const payloadBasic = { ...basicInfo, employeeId: empId };
+      const payloadDetails = { ...data, employeeId: empId };
 
-    await delay(3000);
-    await fetch('http://localhost:4001/basicInfo', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payloadBasic),
-    });
-    setProgress((p) => [...p, '✅ basicInfo saved!']);
+      await delay(3000);
+      await fetch('http://localhost:4001/basicInfo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payloadBasic),
+      });
+      setProgress((p) => [...p, '✅ basicInfo saved!']);
 
-    await delay(3000);
-    await fetch('http://localhost:4002/details', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payloadDetails),
-    });
-    setProgress((p) => [
-      ...p,
-      '✅ details saved!',
-      '🎉 All data processed successfully!',
-    ]);
+      await delay(3000);
+      await fetch('http://localhost:4002/details', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payloadDetails),
+      });
+      setProgress((p) => [
+        ...p,
+        '✅ details saved!',
+        '🎉 All data processed successfully!',
+      ]);
 
-    setLoading(false);
-    localStorage.removeItem(`draft_${role}`);
-    onComplete();
+      localStorage.removeItem(`draft_${role}`);
+      onComplete();
+    } catch (err) {
+      console.error('Submission failed:', err);
+      setProgress((p) => [...p, '❌ Failed to submit data']);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -72,6 +97,7 @@ const WizardStep2 = (props: WizardStep2Props) => {
         <select
           value={data.role || ''}
           onChange={(e) => setData({ ...data, role: e.target.value })}
+          className={errors.role ? 'input--error' : ''}
         >
           <option value="">Select role</option>
           <option>Ops</option>
@@ -79,6 +105,7 @@ const WizardStep2 = (props: WizardStep2Props) => {
           <option>Engineer</option>
           <option>Finance</option>
         </select>
+        {errors.role && <p className="form__error">{errors.role}</p>}
       </div>
 
       <div className="form__group">
@@ -88,6 +115,7 @@ const WizardStep2 = (props: WizardStep2Props) => {
           value={data.location || ''}
           onSelect={(v) => setData({ ...data, location: v })}
         />
+        {errors.location && <p className="form__error">{errors.location}</p>}
       </div>
 
       <div className="form__group">
@@ -97,7 +125,7 @@ const WizardStep2 = (props: WizardStep2Props) => {
 
       <div className="actions">
         {onPrev && (
-          <button onClick={onPrev} className="button">
+          <button onClick={onPrev} className="button" disabled={loading}>
             Back
           </button>
         )}

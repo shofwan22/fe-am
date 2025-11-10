@@ -1,0 +1,23 @@
+.autocomplete > input {
+  width: -webkit-fill-available;
+}
+
+.autocomplete__list {
+  background: #fff;
+  border: 1px solid #ddd;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  z-index: 2;
+  width: 200px;
+}
+
+.autocomplete__list li {
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+}
+
+.autocomplete__list li:hover {
+  background: #f0f0f0;
+}
