@@ -5,3 +5,68 @@ body {
   padding: 0;
   color: black;
 }
+
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.wizard-step,
+.employee-list {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin-top: 1rem;
+}
+
+.form__group {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+input,
+select,
+textarea {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.button {
+  background: #0066ff;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.autocomplete__list {
+  background: #fff;
+  border: 1px solid #ddd;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  z-index: 2;
+  width: 200px;
+}
+.autocomplete__list li {
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+}
+.autocomplete__list li:hover {
+  background: #f0f0f0;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 1rem;
+  }
+  .page {
+    width: 100%;
+  }
+}
