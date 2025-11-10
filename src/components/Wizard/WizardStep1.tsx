@@ -55,8 +55,9 @@ const WizardStep1 = (props: WizardStep1Props) => {
       <h2>Step 1 – Basic Info</h2>
 
       <div className="form__group">
-        <label>Full Name</label>
+        <label htmlFor="fullName">Full Name</label>
         <input
+          id="fullName"
           type="text"
           value={data.name || ''}
           onChange={(e) => setData({ ...data, name: e.target.value })}
@@ -67,8 +68,9 @@ const WizardStep1 = (props: WizardStep1Props) => {
       </div>
 
       <div className="form__group">
-        <label>Email</label>
+        <label htmlFor="email">Email</label>
         <input
+          id="email"
           type="email"
           value={data.email || ''}
           onChange={(e) => setData({ ...data, email: e.target.value })}
@@ -79,7 +81,7 @@ const WizardStep1 = (props: WizardStep1Props) => {
       </div>
 
       <div className="form__group">
-        <label>Department</label>
+        <label htmlFor="department">Department</label>
         <AutoComplete
           endpoint="http://localhost:4001/departments"
           value={data.department || ''}

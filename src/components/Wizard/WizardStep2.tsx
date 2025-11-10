@@ -93,8 +93,9 @@ const WizardStep2 = (props: WizardStep2Props) => {
       <h2>Step 2 – Details & Submit</h2>
 
       <div className="form__group">
-        <label>Role</label>
+        <label htmlFor="role">Role</label>
         <select
+          id="role"
           value={data.role || ''}
           onChange={(e) => setData({ ...data, role: e.target.value })}
           className={errors.role ? 'input--error' : ''}
@@ -109,7 +110,7 @@ const WizardStep2 = (props: WizardStep2Props) => {
       </div>
 
       <div className="form__group">
-        <label>Location</label>
+        <label htmlFor="location">Location</label>
         <AutoComplete
           endpoint="http://localhost:4002/locations"
           value={data.location || ''}
@@ -119,7 +120,7 @@ const WizardStep2 = (props: WizardStep2Props) => {
       </div>
 
       <div className="form__group">
-        <label>Photo</label>
+        <label htmlFor="photo">Photo</label>
         <FileUpload onChange={(b64) => setData({ ...data, photo: b64 })} />
       </div>
 
