@@ -1,7 +1,72 @@
-.employee-table {
-  margin-top: 16px;
+.employee-list {
+  padding: 2rem 1rem;
+  background-color: #fafafa;
+  border-radius: 12px;
 }
 
-.employee-table > thead > tr {
+.table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+.employee-table th,
+.employee-table td {
+  padding: 0.75rem;
   text-align: left;
+  border: 1px solid #ccc;
+  vertical-align: middle;
+}
+
+.employee-table img {
+  max-width: 50px;
+  height: auto;
+  border-radius: 6px;
+}
+
+.pagination {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Make table scrollable on small screens */
+@media (max-width: 768px) {
+  .employee-list {
+    padding: 1rem;
+  }
+
+  .employee-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    border: none;
+  }
+
+  .employee-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .employee-table th,
+  .employee-table td {
+    padding: 0.6rem;
+  }
+
+  .employee-table img {
+    max-width: 40px;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }
