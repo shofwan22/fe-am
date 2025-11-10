@@ -74,7 +74,6 @@ frontend-assignment/
  ├── src/
  │   ├── components/
  │   │   ├── Wizard/
- │   │   ├── EmployeeList/
  │   │   └── common/
  │   ├── hooks/
  │   ├── pages/
@@ -209,36 +208,6 @@ They can optionally be hosted using **Render**, **Railway**, or **MockAPI.io** i
 - Auto-saves every 2 seconds of inactivity  
 - Restores on reload  
 - “Clear Draft” clears only the active role’s draft
-
----
-
-## 🧱 Docker Compose Overview
-
-```yaml
-version: "3.9"
-services:
-  frontend:
-    build: .
-    ports:
-      - "5173:5173"
-    depends_on:
-      - json_step1
-      - json_step2
-  json_step1:
-    image: node:18-alpine
-    volumes:
-      - ./db/db-step1.json:/app/db.json
-    command: npx json-server --watch db.json --port 4001
-    ports:
-      - "4001:4001"
-  json_step2:
-    image: node:18-alpine
-    volumes:
-      - ./db/db-step2.json:/app/db.json
-    command: npx json-server --watch db.json --port 4002
-    ports:
-      - "4002:4002"
-```
 
 ---
 
